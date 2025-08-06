@@ -1583,6 +1583,10 @@
                 font-size: 2rem;
             }
             
+            .contact-info-main > p {
+                font-size: 1rem;
+            }
+            
             .profile-img {
                 width: 250px;
                 height: 300px;
@@ -2032,6 +2036,9 @@
                         <div class="skill-name">Communication</div>
                     </div>
                     <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-laptop-code" style="color: var(--primary-red);"></i>
+                        </div>
                         <div class="skill-name">Presentations</div>
                     </div>
                     <div class="skill-card">
@@ -2286,7 +2293,7 @@
                         <div class="project-overlay-icon">
                             <i class="fas fa-car"></i>
                         </div>
-                        <video class="project-video-player" controls poster="/placeholder.svg?height=250&width=400">
+                        <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
                             <source src="https://github.com/Harshad071/harshad-portfolio/raw/main/videos/1.mp4" type="video/mp4">
                             <div class="project-video-fallback">
                                 🚗
@@ -2311,7 +2318,7 @@
                         <div class="project-overlay-icon">
                             <i class="fas fa-seedling"></i>
                         </div>
-                        <video class="project-video-player" controls poster="/placeholder.svg?height=250&width=400">
+                        <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
                             <source src="https://github.com/Harshad071/harshad-portfolio/raw/main/videos/2.mp4" type="video/mp4">
                             <div class="project-video-fallback">
                                 🌱
@@ -2336,7 +2343,7 @@
                         <div class="project-overlay-icon">
                             <i class="fas fa-road"></i>
                         </div>
-                        <video class="project-video-player" controls poster="/placeholder.svg?height=250&width=400">
+                        <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
                             <source src="https://github.com/Harshad071/harshad-portfolio/raw/main/videos/3.mp4" type="video/mp4">
                             <div class="project-video-fallback">
                                 🛣️
@@ -2361,7 +2368,7 @@
                         <div class="project-overlay-icon">
                             <i class="fas fa-exclamation-triangle"></i>
                         </div>
-                        <video class="project-video-player" controls poster="/placeholder.svg?height=250&width=400">
+                        <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
                             <source src="https://github.com/Harshad071/harshad-portfolio/raw/main/videos/4.mp4" type="video/mp4">
                             <div class="project-video-fallback">
                                 ⚠️
@@ -2629,13 +2636,25 @@
             observer.observe(el);
         });
 
-        // Video error handling
-        document.querySelectorAll('video').forEach(video => {
+        // Video error handling and play/pause logic
+        document.querySelectorAll('.project-video-player').forEach(video => {
+            const fallback = video.nextElementSibling; // Assuming fallback is the next sibling
+            
             video.addEventListener('error', function() {
-                const fallback = this.nextElementSibling;
+                console.error('Video failed to load:', this.src);
                 if (fallback && fallback.classList.contains('project-video-fallback')) {
                     this.style.display = 'none';
                     fallback.style.display = 'flex';
+                }
+            });
+
+            // Optional: Add a click listener to the video itself to toggle play/pause
+            // This is in addition to the native controls provided by the 'controls' attribute
+            video.addEventListener('click', function() {
+                if (this.paused) {
+                    this.play();
+                } else {
+                    this.pause();
                 }
             });
         });
