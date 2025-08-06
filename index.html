@@ -2647,16 +2647,6 @@
                   fallback.style.display = 'flex';
               }
           });
-
-          // Optional: Add a click listener to the video itself to toggle play/pause
-          // This is in addition to the native controls provided by the 'controls' attribute
-          video.addEventListener('click', function() {
-              if (this.paused) {
-                  this.play();
-              } else {
-                  this.pause();
-              }
-          });
       });
 
       // Hamburger animation
