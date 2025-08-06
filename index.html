@@ -1148,7 +1148,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          overflow: hidden;
+          /* Removed overflow: hidden; */
       }
       
       .project-video video {
@@ -1172,28 +1172,7 @@
           display: none; /* Hidden by default, shown on video error */
       }
       
-      .project-overlay-icon {
-          position: absolute;
-          top: 15px;
-          right: 15px;
-          width: 50px;
-          height: 50px;
-          background: rgba(220, 38, 38, 0.9);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 1.2rem;
-          opacity: 0.8;
-          transition: all 0.3s ease;
-          z-index: 2;
-      }
-      
-      .project-card:hover .project-overlay-icon {
-          opacity: 1;
-          transform: scale(1.1);
-      }
+      /* Removed .project-overlay-icon CSS */
       
       .project-content {
           padding: 2.5rem;
@@ -2290,10 +2269,8 @@
           <div class="projects-grid">
               <div class="project-card">
                   <div class="project-video">
-                      <div class="project-overlay-icon">
-                          <i class="fas fa-car"></i>
-                      </div>
-                      <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
+                      <!-- Removed project-overlay-icon -->
+                      <video class="project-video-player" controls preload="auto" playsinline poster="/placeholder.svg?height=250&width=400">
                           <source src="videos/1.mp4" type="video/mp4">
                           <div class="project-video-fallback">
                               🚗
@@ -2315,10 +2292,8 @@
 
               <div class="project-card">
                   <div class="project-video">
-                      <div class="project-overlay-icon">
-                          <i class="fas fa-seedling"></i>
-                      </div>
-                      <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
+                      <!-- Removed project-overlay-icon -->
+                      <video class="project-video-player" controls preload="auto" playsinline poster="/placeholder.svg?height=250&width=400">
                           <source src="videos/2.mp4" type="video/mp4">
                           <div class="project-video-fallback">
                               🌱
@@ -2340,10 +2315,8 @@
 
               <div class="project-card">
                   <div class="project-video">
-                      <div class="project-overlay-icon">
-                          <i class="fas fa-road"></i>
-                      </div>
-                      <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
+                      <!-- Removed project-overlay-icon -->
+                      <video class="project-video-player" controls preload="auto" playsinline poster="/placeholder.svg?height=250&width=400">
                           <source src="videos/3.mp4" type="video/mp4">
                           <div class="project-video-fallback">
                               🛣️
@@ -2365,10 +2338,8 @@
 
               <div class="project-card">
                   <div class="project-video">
-                      <div class="project-overlay-icon">
-                          <i class="fas fa-exclamation-triangle"></i>
-                      </div>
-                      <video class="project-video-player" controls preload="auto" poster="/placeholder.svg?height=250&width=400">
+                      <!-- Removed project-overlay-icon -->
+                      <video class="project-video-player" controls preload="auto" playsinline poster="/placeholder.svg?height=250&width=400">
                           <source src="videos/4.mp4" type="video/mp4">
                           <div class="project-video-fallback">
                               ⚠️
@@ -2389,9 +2360,7 @@
               </div>
               <div class="project-card">
                   <div class="project-video">
-                      <div class="project-overlay-icon">
-                          <i class="fas fa-car-crash"></i>
-                      </div>
+                      <!-- Removed project-overlay-icon -->
                       <div class="project-video-fallback">
                           🔧
                           <p>Real-Time Shock-Absorber Detection</p>
