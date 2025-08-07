@@ -53,6 +53,44 @@
             padding: 0 20px;
         }
         
+        /* Enhanced Animations */
+        @keyframes slideInFromLeft {
+            0% { opacity: 0; transform: translateX(-100px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInFromRight {
+            0% { opacity: 0; transform: translateX(100px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInFromBottom {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes rotateIn {
+            0% { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+            100% { opacity: 1; transform: rotate(0deg) scale(1); }
+        }
+        
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.8), 0 0 60px rgba(220, 38, 38, 0.4); }
+        }
+        
         /* Navigation */
         .navbar {
             position: fixed;
@@ -83,6 +121,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+            animation: glow 3s ease-in-out infinite;
         }
         
         .nav-menu {
@@ -108,6 +147,7 @@
         .nav-link.active {
             color: var(--primary-red);
             text-shadow: 0 0 15px rgba(220, 38, 38, 0.8);
+            transform: translateY(-2px);
         }
         
         .nav-link::after {
@@ -127,10 +167,13 @@
             width: 100%;
         }
         
+        /* Fixed Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
         }
         
         .bar {
@@ -138,7 +181,20 @@
             height: 3px;
             background: var(--text-primary);
             margin: 3px 0;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
         
         /* Slide Container */
@@ -158,7 +214,7 @@
             height: 100%;
             opacity: 0;
             transform: translateX(100%);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 70px 0 0 0;
             overflow-y: auto;
         }
@@ -209,6 +265,14 @@
             z-index: 2;
         }
         
+        .hero-text {
+            animation: slideInFromLeft 1s ease-out;
+        }
+        
+        .hero-image {
+            animation: slideInFromRight 1s ease-out;
+        }
+        
         .hero-title {
             font-size: 3.5rem;
             font-weight: 900;
@@ -242,6 +306,7 @@
             font-weight: 700;
             margin-bottom: 1rem;
             color: rgba(255, 255, 255, 0.9);
+            animation: slideInFromBottom 1s ease-out 0.3s both;
         }
         
         .hero-description {
@@ -249,12 +314,14 @@
             margin-bottom: 2rem;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.7;
+            animation: slideInFromBottom 1s ease-out 0.6s both;
         }
         
         .hero-buttons {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
+            animation: slideInFromBottom 1s ease-out 0.9s both;
         }
         
         .btn {
@@ -297,7 +364,7 @@
         }
         
         .btn-primary:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
         }
         
@@ -313,7 +380,7 @@
         
         .btn-download:hover {
             background: var(--primary-red);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
         }
         
@@ -390,12 +457,7 @@
             position: relative;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(220, 38, 38, 0.1); /* Initial subtle shadow */
-            transition: text-shadow 0.3s ease-in-out; /* Add transition */
-        }
-        
-        .slide-title:hover {
-            text-shadow: 0 0 30px rgba(220, 38, 38, 0.6), 0 0 50px rgba(220, 38, 38, 0.3); /* More pronounced shadow on hover */
+            animation: slideInFromBottom 0.8s ease-out;
         }
         
         .slide-title::after {
@@ -409,6 +471,7 @@
             background: var(--gradient);
             border-radius: 2px;
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+            animation: slideInFromBottom 0.8s ease-out 0.3s both;
         }
         
         /* About Slide */
@@ -423,11 +486,18 @@
             font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-secondary);
+            animation: slideInFromLeft 0.8s ease-out 0.3s both;
         }
         
         .about-text p {
             margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideInFromBottom 0.6s ease-out forwards;
         }
+        
+        .about-text p:nth-child(1) { animation-delay: 0.4s; }
+        .about-text p:nth-child(2) { animation-delay: 0.6s; }
+        .about-text p:nth-child(3) { animation-delay: 0.8s; }
         
         .about-text strong {
             color: var(--primary-red);
@@ -440,6 +510,7 @@
             border-radius: 20px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-lg);
+            animation: slideInFromRight 0.8s ease-out 0.5s both;
         }
         
         .personal-info h3 {
@@ -456,7 +527,14 @@
             margin-bottom: 1rem;
             color: var(--text-primary);
             font-weight: 500;
+            opacity: 0;
+            animation: slideInFromRight 0.5s ease-out forwards;
         }
+        
+        .info-item:nth-child(2) { animation-delay: 0.7s; }
+        .info-item:nth-child(3) { animation-delay: 0.8s; }
+        .info-item:nth-child(4) { animation-delay: 0.9s; }
+        .info-item:nth-child(5) { animation-delay: 1s; }
         
         .info-item i {
             color: var(--primary-red);
@@ -479,10 +557,17 @@
             box-shadow: var(--shadow-lg);
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
+            opacity: 0;
+            animation: bounceIn 0.6s ease-out forwards;
         }
         
+        .stat-card:nth-child(1) { animation-delay: 1.1s; }
+        .stat-card:nth-child(2) { animation-delay: 1.2s; }
+        .stat-card:nth-child(3) { animation-delay: 1.3s; }
+        .stat-card:nth-child(4) { animation-delay: 1.4s; }
+        
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.05);
             box-shadow: 0 25px 50px rgba(220, 38, 38, 0.2);
             border-color: var(--primary-red);
         }
@@ -510,6 +595,7 @@
             margin-bottom: 3rem;
             flex-wrap: wrap;
             gap: 1rem;
+            animation: slideInFromBottom 0.8s ease-out 0.3s both;
         }
         
         .skills-tab {
@@ -532,11 +618,13 @@
             background: var(--gradient);
             border-color: var(--primary-red);
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+            transform: scale(1.05);
         }
         
         .skills-tab:hover:not(.active) {
             border-color: var(--primary-red);
             color: var(--primary-red);
+            transform: translateY(-3px);
         }
         
         .skills-content {
@@ -545,12 +633,7 @@
         
         .skills-content.active {
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            animation: fadeInScale 0.5s ease-in-out;
         }
         
         .skills-description {
@@ -562,6 +645,7 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            animation: slideInFromBottom 0.6s ease-out 0.2s both;
         }
         
         .skills-grid {
@@ -581,10 +665,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            animation: bounceIn 0.6s ease-out forwards;
         }
         
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-card:nth-child(5) { animation-delay: 0.5s; }
+        .skill-card:nth-child(6) { animation-delay: 0.6s; }
+        
         .skill-card:hover {
-            transform: translateY(-10px) scale(1.05);
+            transform: translateY(-10px) scale(1.05) rotate(5deg);
             box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
             border-color: var(--primary-red);
         }
@@ -596,7 +689,7 @@
         }
         
         .skill-card:hover .skill-icon {
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(-5deg);
             color: var(--primary-red);
         }
         
@@ -606,10 +699,60 @@
             font-size: 1rem;
         }
         
-        /* Education Slide */
+        /* Enhanced Education Slide */
+        .education-container {
+            position: relative;
+        }
+        
+        .education-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+            gap: 2rem;
+            animation: slideInFromBottom 0.8s ease-out 0.3s both;
+        }
+        
+        .education-tab {
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .education-tab.active {
+            color: white;
+            background: var(--gradient);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+            transform: scale(1.05);
+        }
+        
+        .education-tab:hover:not(.active) {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+        
+        .education-content {
+            display: none;
+        }
+        
+        .education-content.active {
+            display: block;
+            animation: fadeInScale 0.6s ease-in-out;
+        }
+        
+        /* Creative Timeline */
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
@@ -624,6 +767,7 @@
             transform: translateX(-50%);
             border-radius: 2px;
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+            animation: slideInFromBottom 1s ease-out 0.5s both;
         }
         
         .timeline-item {
@@ -631,9 +775,15 @@
             margin-bottom: 4rem;
             display: flex;
             align-items: center;
+            opacity: 0;
+            animation: slideInFromLeft 0.8s ease-out forwards;
         }
         
-        .timeline-item:nth-child(odd) {
+        .timeline-item:nth-child(1) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.8s; animation-name: slideInFromRight; }
+        .timeline-item:nth-child(3) { animation-delay: 1s; }
+        
+        .timeline-item:nth-child(even) {
             flex-direction: row-reverse;
         }
         
@@ -648,7 +798,12 @@
             z-index: 2;
             border: 4px solid white;
             box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.3);
+            animation: bounceIn 0.6s ease-out forwards;
         }
+        
+        .timeline-dot:nth-child(1) { animation-delay: 0.7s; }
+        .timeline-dot:nth-child(2) { animation-delay: 0.9s; }
+        .timeline-dot:nth-child(3) { animation-delay: 1.1s; }
         
         .timeline-content {
             background: var(--bg-card);
@@ -659,10 +814,26 @@
             position: relative;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .timeline-content:hover::before {
+            left: 100%;
         }
         
         .timeline-content:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 25px 50px rgba(220, 38, 38, 0.15);
             border-color: var(--primary-red);
         }
@@ -678,6 +849,7 @@
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            animation: rotateIn 0.6s ease-out;
         }
         
         .timeline-content h3 {
@@ -700,6 +872,75 @@
             font-size: 1.2rem;
         }
         
+        /* Certifications Grid */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .certification-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            animation: bounceIn 0.6s ease-out forwards;
+        }
+        
+        .certification-card:nth-child(1) { animation-delay: 0.2s; }
+        .certification-card:nth-child(2) { animation-delay: 0.4s; }
+        .certification-card:nth-child(3) { animation-delay: 0.6s; }
+        .certification-card:nth-child(4) { animation-delay: 0.8s; }
+        
+        .certification-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(220, 38, 38, 0.15);
+            border-color: var(--primary-red);
+        }
+        
+        .cert-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cert-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
+        }
+        
+        .cert-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+        
+        .cert-issuer {
+            color: var(--primary-red);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .cert-date {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+        
         /* Projects Slide */
         .projects-grid {
             display: grid;
@@ -714,7 +955,15 @@
             box-shadow: var(--shadow-lg);
             transition: all 0.4s ease;
             border: 2px solid var(--border-color);
+            opacity: 0;
+            animation: slideInFromBottom 0.8s ease-out forwards;
         }
+        
+        .project-card:nth-child(1) { animation-delay: 0.2s; }
+        .project-card:nth-child(2) { animation-delay: 0.4s; }
+        .project-card:nth-child(3) { animation-delay: 0.6s; }
+        .project-card:nth-child(4) { animation-delay: 0.8s; }
+        .project-card:nth-child(5) { animation-delay: 1s; }
         
         .project-card:hover {
             transform: translateY(-15px) scale(1.02);
@@ -722,6 +971,7 @@
             border-color: var(--primary-red);
         }
         
+        /* Fixed Project Video Sizing */
         .project-video {
             position: relative;
             height: 250px;
@@ -729,6 +979,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
         
         .project-video video {
@@ -748,7 +999,13 @@
             color: var(--text-secondary);
             text-align: center;
             padding: 2rem;
-            font-size: 4rem;
+            font-size: 3rem;
+        }
+        
+        .project-video-fallback p {
+            font-size: 1rem;
+            margin-top: 1rem;
+            font-weight: 600;
         }
         
         .project-content {
@@ -783,6 +1040,12 @@
             border-radius: 25px;
             font-size: 0.85rem;
             font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .project-tech .tech:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
         }
         
         /* Contact Slide */
@@ -793,6 +1056,7 @@
         
         .contact-info-main {
             text-align: center;
+            animation: slideInFromBottom 0.8s ease-out 0.3s both;
         }
         
         .contact-info-main h3 {
@@ -832,10 +1096,17 @@
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
+            opacity: 0;
+            animation: slideInFromBottom 0.6s ease-out forwards;
         }
         
+        .contact-method:nth-child(1) { animation-delay: 0.5s; }
+        .contact-method:nth-child(2) { animation-delay: 0.7s; }
+        .contact-method:nth-child(3) { animation-delay: 0.9s; }
+        .contact-method:nth-child(4) { animation-delay: 1.1s; }
+        
         .contact-method:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-red);
         }
@@ -852,6 +1123,11 @@
             font-size: 1.8rem;
             flex-shrink: 0;
             box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-method:hover .contact-icon {
+            transform: scale(1.1) rotate(10deg);
         }
         
         .contact-details h4 {
@@ -951,8 +1227,28 @@
             }
             
             .profile-img {
-                width: 250px;
-                height: 300px;
+                width: 280px;
+                height: 320px;
+            }
+            
+            .education-tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Fixed mobile project video sizing */
+            .project-video {
+                height: 200px;
+            }
+            
+            .project-video-fallback {
+                font-size: 2.5rem;
+                padding: 1.5rem;
             }
         }
         
@@ -986,8 +1282,8 @@
             }
             
             .profile-img {
-                width: 200px;
-                height: 240px;
+                width: 240px;
+                height: 280px;
             }
             
             .project-content {
@@ -1006,6 +1302,20 @@
             
             .contact-info-main h3 {
                 font-size: 1.8rem;
+            }
+            
+            /* Further mobile optimization */
+            .project-video {
+                height: 180px;
+            }
+            
+            .project-video-fallback {
+                font-size: 2rem;
+                padding: 1rem;
+            }
+            
+            .project-video-fallback p {
+                font-size: 0.9rem;
             }
         }
         
@@ -1036,6 +1346,13 @@
         ::-moz-selection {
             background: var(--primary-red);
             color: white;
+        }
+        
+        /* Pulse animation for availability indicator */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
     </style>
 </head>
@@ -1403,37 +1720,155 @@
             </div>
         </div>
 
-        <!-- Education Slide -->
+        <!-- Enhanced Education Slide -->
         <div class="slide" id="education">
             <div class="content-slide">
                 <div class="container">
-                    <h2 class="slide-title">Education</h2>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-year">2022-2026</div>
-                                <h3>B.E. in Computer Engineering</h3>
-                                <div class="institution">MIT Academy of Engineering, Pune</div>
-                                <div class="grade">CGPA: 7.54</div>
+                    <h2 class="slide-title">Education & Certifications</h2>
+                    
+                    <div class="education-container">
+                        <div class="education-tabs">
+                            <button class="education-tab active" data-tab="education">Education</button>
+                            <button class="education-tab" data-tab="certifications">Certifications</button>
+                        </div>
+
+                        <div class="education-content active" id="education">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-year">2022-2026</div>
+                                        <h3>B.E. in Computer Engineering</h3>
+                                        <div class="institution">MIT Academy of Engineering, Pune</div>
+                                        <div class="grade">CGPA: 7.54</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-year">2022</div>
+                                        <h3>12th Grade (HSC)</h3>
+                                        <div class="institution">P.D.E.A, Pune</div>
+                                        <div class="grade">66.1%</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-year">2020</div>
+                                        <h3>10th Grade (SSC)</h3>
+                                        <div class="institution">VNEMS Tata Motors, Pune</div>
+                                        <div class="grade">85.4%</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-year">2022</div>
-                                <h3>12th Grade (HSC)</h3>
-                                <div class="institution">P.D.E.A, Pune</div>
-                                <div class="grade">66.1%</div>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-year">2020</div>
-                                <h3>10th Grade (SSC)</h3>
-                                <div class="institution">VNEMS Tata Motors, Pune</div>
-                                <div class="grade">85.4%</div>
+
+                        <div class="education-content" id="certifications">
+                            <div class="certifications-grid">
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>Building Interactive Dashboards with Microsoft Power BI</h4>
+                                            <div class="cert-issuer">Infosys</div>
+                                            <div class="cert-date">May 2024</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>Python Bootcamp</h4>
+                                            <div class="cert-issuer">Udemy</div>
+                                            <div class="cert-date">September 2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fas fa-robot"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>Python for Machine Learning and Data Science</h4>
+                                            <div class="cert-issuer">Udemy</div>
+                                            <div class="cert-date">September 2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>PCAP: Programming Essentials in Python</h4>
+                                            <div class="cert-issuer">Cisco</div>
+                                            <div class="cert-date">June 2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fas fa-calculator"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>Matlab Certified</h4>
+                                            <div class="cert-issuer">MathWorks</div>
+                                            <div class="cert-date">September 2023</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>Eduskill AI-ML Virtual Internship</h4>
+                                            <div class="cert-issuer">AICTE</div>
+                                            <div class="cert-date">July 2024 - September 2024</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fas fa-network-wired"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>CCNA - Introduction to Networks</h4>
+                                            <div class="cert-issuer">Cisco</div>
+                                            <div class="cert-date">October 2024</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="certification-card">
+                                    <div class="cert-header">
+                                        <div class="cert-icon">
+                                            <i class="fas fa-cloud"></i>
+                                        </div>
+                                        <div class="cert-info">
+                                            <h4>Cloud Computing</h4>
+                                            <div class="cert-issuer">NPTEL, IIT Kharagpur</div>
+                                            <div class="cert-date">July 2024 - October 2024</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1451,7 +1886,7 @@
                             <div class="project-video">
                                 <div class="project-video-fallback">
                                     <i class="fas fa-database" style="font-size: 4rem; color: var(--primary-red); margin-bottom: 1rem;"></i>
-                                    <p style="font-size: 1.2rem;">Data Science Intern</p>
+                                    <p>Data Science Intern</p>
                                 </div>
                             </div>
                             <div class="project-content">
@@ -1475,7 +1910,7 @@
                             <div class="project-video">
                                 <div class="project-video-fallback">
                                     <i class="fas fa-microchip" style="font-size: 4rem; color: var(--primary-red); margin-bottom: 1rem;"></i>
-                                    <p style="font-size: 1.2rem;">IoT Intern</p>
+                                    <p>IoT Intern</p>
                                 </div>
                             </div>
                             <div class="project-content">
@@ -1729,25 +2164,10 @@
             });
         });
 
-        // Mobile Navigation Toggle
+        // Fixed Mobile Navigation Toggle
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
-        });
-
-        // Hamburger animation
-        hamburger.addEventListener('click', () => {
-            const bars = document.querySelectorAll('.bar');
-            bars.forEach((bar, index) => {
-                if (hamburger.classList.contains('active')) {
-                    if (index === 0) bar.style.transform = 'translateY(8px) rotate(45deg)';
-                    if (index === 1) bar.style.opacity = '0';
-                    if (index === 2) bar.style.transform = 'translateY(-8px) rotate(-45deg)';
-                } else {
-                    bar.style.transform = '';
-                    bar.style.opacity = '';
-                }
-            });
         });
 
         // Typing Animation
@@ -1793,6 +2213,27 @@
             });
         });
 
+        // Education Tab Functionality
+        const educationTabs = document.querySelectorAll('.education-tab');
+        const educationContents = document.querySelectorAll('.education-content');
+
+        educationTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                educationTabs.forEach(t => t.classList.remove('active'));
+                educationContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding content
+                const targetContent = document.getElementById(tab.dataset.tab);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+
         // Video error handling
         document.querySelectorAll('.project-video-player').forEach(video => {
             const fallback = video.nextElementSibling;
@@ -1821,17 +2262,6 @@
             }
         });
 
-        // Pulse animation for availability indicator
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-                70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-                100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-            }
-        `;
-        document.head.appendChild(style);
-
         // Initialize the portfolio
         window.addEventListener('load', init);
 
@@ -1847,30 +2277,25 @@
             });
         });
 
-        // Add intersection observer for animations when slides become active
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        // Enhanced animations on slide change
+        function triggerSlideAnimations(slideIndex) {
+            const currentSlideElement = slides[slideIndex];
+            const animatedElements = currentSlideElement.querySelectorAll('.stat-card, .skill-card, .project-card, .timeline-item, .contact-method, .certification-card');
+            
+            animatedElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+                el.classList.add('animate-in');
             });
-        }, observerOptions);
+        }
 
-        // Observe elements for animation
-        document.querySelectorAll('.stat-card, .skill-card, .project-card, .timeline-item, .contact-method').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+        // Add CSS class for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .animate-in {
+                animation: slideInFromBottom 0.6s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
-
-
