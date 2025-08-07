@@ -91,6 +91,16 @@
             50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.8), 0 0 60px rgba(220, 38, 38, 0.4); }
         }
         
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes educationFloat {
+            0%, 100% { transform: perspective(1000px) rotateY(-5deg) translateY(0px); }
+            50% { transform: perspective(1000px) rotateY(-5deg) translateY(-15px); }
+        }
+        
         /* Navigation */
         .navbar {
             position: fixed;
@@ -406,11 +416,6 @@
             animation: float 6s ease-in-out infinite;
         }
         
-        @keyframes float {
-            0%, 100% { transform: perspective(1000px) rotateY(-5deg) translateY(0px); }
-            50% { transform: perspective(1000px) rotateY(-5deg) translateY(-20px); }
-        }
-        
         .profile-card:hover {
             transform: perspective(1000px) rotateY(0deg) scale(1.05);
             box-shadow: 
@@ -699,7 +704,7 @@
             font-size: 1rem;
         }
         
-        /* Enhanced Education Slide */
+        /* Enhanced Creative Education Slide */
         .education-container {
             position: relative;
         }
@@ -749,7 +754,7 @@
             animation: fadeInScale 0.6s ease-in-out;
         }
         
-        /* Creative Timeline */
+        /* Creative Enhanced Timeline */
         .timeline {
             position: relative;
             max-width: 1000px;
@@ -815,6 +820,9 @@
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
         
         .timeline-content::before {
@@ -836,6 +844,22 @@
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 25px 50px rgba(220, 38, 38, 0.15);
             border-color: var(--primary-red);
+        }
+        
+        /* Education Images */
+        .education-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary-red);
+            box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
+            animation: educationFloat 4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        
+        .education-info {
+            flex: 1;
         }
         
         .timeline-year {
@@ -872,7 +896,7 @@
             font-size: 1.2rem;
         }
         
-        /* Certifications Grid */
+        /* Enhanced Certifications Grid */
         .certifications-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -889,15 +913,36 @@
             border: 1px solid var(--border-color);
             opacity: 0;
             animation: bounceIn 0.6s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.05), transparent);
+            transition: left 0.5s;
+        }
+        
+        .certification-card:hover::before {
+            left: 100%;
         }
         
         .certification-card:nth-child(1) { animation-delay: 0.2s; }
         .certification-card:nth-child(2) { animation-delay: 0.4s; }
         .certification-card:nth-child(3) { animation-delay: 0.6s; }
         .certification-card:nth-child(4) { animation-delay: 0.8s; }
+        .certification-card:nth-child(5) { animation-delay: 1s; }
+        .certification-card:nth-child(6) { animation-delay: 1.2s; }
+        .certification-card:nth-child(7) { animation-delay: 1.4s; }
+        .certification-card:nth-child(8) { animation-delay: 1.6s; }
         
         .certification-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px) scale(1.02) rotate(1deg);
             box-shadow: 0 25px 50px rgba(220, 38, 38, 0.15);
             border-color: var(--primary-red);
         }
@@ -920,6 +965,11 @@
             color: white;
             font-size: 1.2rem;
             box-shadow: 0 8px 16px rgba(220, 38, 38, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .certification-card:hover .cert-icon {
+            transform: scale(1.1) rotate(10deg);
         }
         
         .cert-info h4 {
@@ -1208,6 +1258,14 @@
                 width: calc(100% - 60px);
                 margin-left: 60px !important;
                 margin-right: 0 !important;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .education-image {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 1rem;
             }
             
             .projects-grid {
@@ -1316,6 +1374,11 @@
             
             .project-video-fallback p {
                 font-size: 0.9rem;
+            }
+            
+            .education-image {
+                width: 50px;
+                height: 50px;
             }
         }
         
@@ -1720,7 +1783,7 @@
             </div>
         </div>
 
-        <!-- Enhanced Education Slide -->
+        <!-- Enhanced Creative Education Slide -->
         <div class="slide" id="education">
             <div class="content-slide">
                 <div class="container">
@@ -1728,43 +1791,52 @@
                     
                     <div class="education-container">
                         <div class="education-tabs">
-                            <button class="education-tab active" data-tab="education">Education</button>
-                            <button class="education-tab" data-tab="certifications">Certifications</button>
+                            <button class="education-tab active" data-tab="education-timeline">Education</button>
+                            <button class="education-tab" data-tab="certifications-grid">Certifications</button>
                         </div>
 
-                        <div class="education-content active" id="education">
+                        <div class="education-content active" id="education-timeline">
                             <div class="timeline">
                                 <div class="timeline-item">
                                     <div class="timeline-dot"></div>
                                     <div class="timeline-content">
-                                        <div class="timeline-year">2022-2026</div>
-                                        <h3>B.E. in Computer Engineering</h3>
-                                        <div class="institution">MIT Academy of Engineering, Pune</div>
-                                        <div class="grade">CGPA: 7.54</div>
+                                        <img src="/placeholder.svg?height=80&width=80&text=MIT+AOE" alt="MIT Academy of Engineering" class="education-image">
+                                        <div class="education-info">
+                                            <div class="timeline-year">2022-2026</div>
+                                            <h3>B.E. in Computer Engineering</h3>
+                                            <div class="institution">MIT Academy of Engineering, Pune</div>
+                                            <div class="grade">CGPA: 7.54</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="timeline-item">
                                     <div class="timeline-dot"></div>
                                     <div class="timeline-content">
-                                        <div class="timeline-year">2022</div>
-                                        <h3>12th Grade (HSC)</h3>
-                                        <div class="institution">P.D.E.A, Pune</div>
-                                        <div class="grade">66.1%</div>
+                                        <img src="/placeholder.svg?height=80&width=80&text=PDEA+College" alt="P.D.E.A College" class="education-image">
+                                        <div class="education-info">
+                                            <div class="timeline-year">2022</div>
+                                            <h3>12th Grade (HSC)</h3>
+                                            <div class="institution">P.D.E.A, Pune</div>
+                                            <div class="grade">66.1%</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="timeline-item">
                                     <div class="timeline-dot"></div>
                                     <div class="timeline-content">
-                                        <div class="timeline-year">2020</div>
-                                        <h3>10th Grade (SSC)</h3>
-                                        <div class="institution">VNEMS Tata Motors, Pune</div>
-                                        <div class="grade">85.4%</div>
+                                        <img src="/placeholder.svg?height=80&width=80&text=VNEMS+School" alt="VNEMS Tata Motors School" class="education-image">
+                                        <div class="education-info">
+                                            <div class="timeline-year">2020</div>
+                                            <h3>10th Grade (SSC)</h3>
+                                            <div class="institution">VNEMS Tata Motors, Pune</div>
+                                            <div class="grade">85.4%</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="education-content" id="certifications">
+                        <div class="education-content" id="certifications-grid">
                             <div class="certifications-grid">
                                 <div class="certification-card">
                                     <div class="cert-header">
@@ -2213,7 +2285,7 @@
             });
         });
 
-        // Education Tab Functionality
+        // Fixed Education Tab Functionality
         const educationTabs = document.querySelectorAll('.education-tab');
         const educationContents = document.querySelectorAll('.education-content');
 
@@ -2299,4 +2371,3 @@
     </script>
 </body>
 </html>
-
